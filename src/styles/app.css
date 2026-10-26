@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+  --color-page: #ffffff;
+  --color-ink: #202823;
+  --color-muted: #59645e;
+  --color-accent: #27634a;
+  --color-surface: #f7f9f7;
+  --color-cover-surface: #edf3f0;
+  --color-line: #dde5df;
+}
+
+@layer base {
+  body {
+    @apply m-0 bg-page font-sans text-ink antialiased;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  summary:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
+}
+
+@layer components {
+  .detail-section {
+    @apply py-9 sm:py-12;
+  }
+
+  .detail-heading {
+    @apply text-2xl font-semibold leading-normal tracking-tight;
+  }
+
+  .page-shell {
+    @apply mx-auto w-full max-w-[1184px] px-5 sm:px-8;
+  }
+
+  .brand-mark {
+    @apply relative block h-6 w-6 shrink-0 rounded-sm border-2 border-accent;
+  }
+
+  .brand-mark::after {
+    content: "";
+    @apply absolute top-1 left-1 h-3 w-3 rounded-[1px] bg-accent;
+  }
+
+  .nav-link {
+    @apply inline-flex min-h-11 min-w-11 items-center justify-center text-sm text-muted underline-offset-8;
+  }
+
+  .nav-link:hover,
+  .card-link:hover {
+    @apply text-accent underline;
+  }
+
+  .primary-link {
+    @apply inline-flex min-h-12 items-center justify-center gap-4 rounded-lg border border-accent bg-accent px-5 text-sm font-medium text-white;
+  }
+
+  .primary-link:hover {
+    @apply bg-page text-accent;
+  }
+
+  .skip-link {
+    @apply sr-only;
+  }
+
+  .skip-link:focus {
+    @apply fixed top-3 left-3 z-10 rounded-md bg-page p-4 text-accent not-sr-only;
+  }
+}

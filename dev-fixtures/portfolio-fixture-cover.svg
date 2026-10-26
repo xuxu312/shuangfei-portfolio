@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="portfolio-visual-fixture-5-2" width="720" height="480" viewBox="0 0 720 480" fill="none">
+  <title>想法收集器测试封面，不是真实产品截图</title>
+  <rect width="720" height="480" fill="#EDF3F0"/>
+  <path d="M88 320C135 368 195 402 264 402M609 115C577 76 534 55 477 55" stroke="#CCDCD3" stroke-width="2"/>
+  <rect x="159" y="92" width="416" height="286" rx="15" fill="#CFDDD5" transform="rotate(7 159 92)"/>
+  <rect x="123" y="92" width="456" height="294" rx="14" fill="#FAFCFB" stroke="#CCDCD3"/>
+  <path d="M123 143H579" stroke="#DFE8E2"/>
+  <circle cx="147" cy="118" r="4" fill="#B7C9BF"/>
+  <circle cx="162" cy="118" r="4" fill="#D6E2DC"/>
+  <circle cx="177" cy="118" r="4" fill="#D6E2DC"/>
+  <text x="548" y="123" text-anchor="end" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#527160">概念示意</text>
+  <text x="153" y="186" font-family="Microsoft YaHei, sans-serif" font-size="21" font-weight="600" fill="#204F3C">给想法一个落点。</text>
+  <path d="M154 207H352" stroke="#CCDCD3" stroke-width="5" stroke-linecap="round"/>
+  <rect x="152" y="234" width="118" height="121" rx="8" fill="#27634A"/>
+  <path d="M183 281C183 262 212 254 225 272C236 287 215 295 215 307M215 317V319" stroke="#E5EFE9" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="241" cy="252" r="4" fill="#B6D2C3"/>
+  <rect x="284" y="234" width="118" height="121" rx="8" fill="#E8EEE8"/>
+  <circle cx="329" cy="279" r="17" stroke="#769784" stroke-width="2"/>
+  <circle cx="355" cy="294" r="17" stroke="#769784" stroke-width="2"/>
+  <path d="M308 332H360" stroke="#B4C9BB" stroke-width="4" stroke-linecap="round"/>
+  <rect x="416" y="234" width="132" height="121" rx="8" fill="#F2EDDE"/>
+  <path d="M443 263H520M443 281H506M443 299H515M443 332H477" stroke="#C9BE99" stroke-width="4" stroke-linecap="round"/>
+  <rect x="491" y="343" width="128" height="38" rx="19" fill="#FFFFFF" stroke="#CCDCD3"/>
+  <text x="555" y="367" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="12" fill="#40604F">仅用于视觉评审</text>
+</svg>
