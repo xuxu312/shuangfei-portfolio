@@ -1,3 +1,4 @@
+import { sitePath } from "../lib/publication";
 import { Link } from "react-router";
 import { Header } from "./Header";
 import type { Project } from "../types/content";
@@ -19,7 +20,7 @@ export function ProjectDetailContent({ project, backHref = "/#projects" }: { pro
         </header>
 
         <figure className="overflow-hidden rounded-2xl border border-line bg-surface">
-          <a href={project.cover} target="_blank" rel="noopener noreferrer" aria-label="查看封面公开展示图（新标签页）" className="block" title="新标签页查看封面公开展示图">
+          <a href={sitePath(project.cover)} target="_blank" rel="noopener noreferrer" aria-label="查看封面公开展示图（新标签页）" className="block" title="新标签页查看封面公开展示图">
             <img {...coverImage(project.cover)} sizes="(min-width: 1040px) 974px, (min-width: 640px) calc(100vw - 66px), calc(100vw - 42px)" alt={project.coverAlt} width={project.coverWidth} height={project.coverHeight} fetchPriority="high" loading="eager" className="mx-auto h-auto w-full max-w-[974px]" />
           </a>
           {project.coverCaption && <figcaption className="border-t border-line px-5 py-3 text-sm leading-6 text-muted sm:px-7">{project.coverCaption}</figcaption>}
@@ -57,8 +58,8 @@ export function ProjectDetailContent({ project, backHref = "/#projects" }: { pro
             {project.evidence.map((item) => (
               <figure key={item.title} className="min-w-0">
                 <h3 className="mb-4 text-lg font-medium">{item.title}</h3>
-                <a href={item.src} target="_blank" rel="noopener noreferrer" aria-label={`查看${item.title}公开展示图（新标签页）`} className="flex min-h-72 items-center justify-center rounded-xl border border-line bg-surface p-4 sm:min-h-80">
-                  <img src={item.src} alt={item.alt} width={item.width} height={item.height} loading="lazy" className="h-auto max-h-80 max-w-full object-contain" />
+                <a href={sitePath(item.src)} target="_blank" rel="noopener noreferrer" aria-label={`查看${item.title}公开展示图（新标签页）`} className="flex min-h-72 items-center justify-center rounded-xl border border-line bg-surface p-4 sm:min-h-80">
+                  <img src={sitePath(item.src)} alt={item.alt} width={item.width} height={item.height} loading="lazy" className="h-auto max-h-80 max-w-full object-contain" />
                 </a>
                 <figcaption className="mt-4 text-sm leading-7 text-muted">{item.caption} 点击图片可查看公开展示图。</figcaption>
               </figure>
@@ -68,8 +69,8 @@ export function ProjectDetailContent({ project, backHref = "/#projects" }: { pro
 
         {project.overviewImage && <details className="group border-y border-line py-4">
           <summary className="min-h-11 cursor-pointer py-2.5 font-medium text-accent">查看项目总览（公开版）</summary>
-          <img src={project.overviewImage.src} alt={project.overviewImage.alt} width={project.overviewImage.width} height={project.overviewImage.height} loading="lazy" className="mt-5 h-auto w-full" />
-          <a className="nav-link mt-3" href={project.overviewImage.src} target="_blank" rel="noopener noreferrer">新标签页查看公开版总览</a>
+          <img src={sitePath(project.overviewImage.src)} alt={project.overviewImage.alt} width={project.overviewImage.width} height={project.overviewImage.height} loading="lazy" className="mt-5 h-auto w-full" />
+          <a className="nav-link mt-3" href={sitePath(project.overviewImage.src)} target="_blank" rel="noopener noreferrer">新标签页查看公开版总览</a>
         </details>}
         {project.links && project.links.length > 0 && <section aria-labelledby="links-title" className="detail-section border-t border-line">
           <h2 id="links-title" className="detail-heading">相关链接</h2>

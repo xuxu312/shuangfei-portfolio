@@ -1,3 +1,4 @@
+import { sitePath } from "../lib/publication";
 import { Link } from "react-router";
 import type { ToolCardContent } from "../types/content";
 import { ContentSection } from "./ContentSection";
@@ -11,7 +12,7 @@ export function Tools({ items }: { items: readonly ToolCardContent[] }) {
         <div className="space-y-5">
           {items.map((tool) => (
             <article key={tool.id} aria-labelledby={`tool-${tool.id}-title`} className="rounded-xl border border-line p-5 sm:flex sm:items-start sm:gap-5">
-              <img src={tool.cover} alt={tool.coverAlt} width={tool.coverWidth} height={tool.coverHeight} loading="lazy" className="h-auto w-full rounded-lg object-contain sm:w-40 sm:shrink-0" />
+              <img src={sitePath(tool.cover)} alt={tool.coverAlt} width={tool.coverWidth} height={tool.coverHeight} loading="lazy" className="h-auto w-full rounded-lg object-contain sm:w-40 sm:shrink-0" />
               <div className="mt-4 min-w-0 sm:mt-0">
                 <p className="text-sm leading-6 text-accent">{tool.status}</p>
                 <h3 id={`tool-${tool.id}-title`} className="mt-2 text-xl leading-8 font-semibold wrap-anywhere">{tool.title}</h3>

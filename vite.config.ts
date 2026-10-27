@@ -9,6 +9,7 @@ import { resolvePublication } from "./src/lib/publication.ts";
 const publication = resolvePublication(process.env.PORTFOLIO_TARGET, process.env.PORTFOLIO_SITE_URL);
 
 export default defineConfig({
+  base: publication.basePath,
   define: { __PORTFOLIO_PUBLICATION__: JSON.stringify(publication) },
   plugins: [
     {
@@ -31,7 +32,8 @@ export default defineConfig({
           if (request.method !== "GET" && request.method !== "HEAD") return next();
           try {
             const url = new URL(request.url ?? "/", "http://localhost");
-            const pathname = decodeURIComponent(url.pathname);
+            if (!url.pathname.startsWith(publication.basePath)) return next();
+            const pathname = decodeURIComponent("/" + url.pathname.slice(publication.basePath.length));
             const indexFile = resolve(root, `.${pathname}`, "index.html");
             const fromRoot = relative(root, indexFile);
             if (fromRoot !== ".." && !fromRoot.startsWith(`..${sep}`) && existsSync(indexFile)) {

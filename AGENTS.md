@@ -4,7 +4,7 @@
 - 当前首版已确认只展示一个真实 MMC 项目，不按早期的多个精选项目设想编造内容；公开名称仅使用“双非电源仔”。
 - 本轮新增的开发文档仅用于仓库阅读，不导入页面、不复制进 `public/`，不得重新带入私人路径、身份资料或未审核的图片。
 
-- 当前为本地审核候选；尚未建立Git历史。不得自动初始化Git、首次提交、上传或连接部署平台。
+- 当前是独立发布仓库，已建立干净 Git 历史。用户已将仓库设为 Public，并授权本次配置和发布 GitHub Pages；不连接 Vercel。后续提交/发布按用户当次授权执行。
 - React + TypeScript + Vite + Tailwind CSS + React Router Framework Mode；保持ssr:false及公开页面预渲染。
 - 保持白色主体、绿色点缀、既有作品与布局；公开名称仅用已确认的昵称。
 - 不编造作品、链接或个人资料。工具/分享允许空内容。
@@ -13,6 +13,6 @@
 - 测试夹具仅供隔离开发，不能进入生产产物；不删除隔离与隐私检查来通过构建。
 - 私有检查词表留在仓库之外，通过PORTFOLIO_PRIVATE_TERMS_FILE按需指定；不复制其内容或路径到代码/README。
 - 以npm ci安装锁定依赖；检查类型、lint、内容、隐私、静态构建与实际浏览器。
-- Vercel候选按Other、Node24、build/client静态输出准备；不引入服务端运行功能或额外托管依赖。
-- 暂无正式网址，保留noindex，不生成假canonical/分享地址。noindex不提供访问保护。
+- 当前采用 GitHub Pages + 手动 GitHub Actions，main 为发布分支，Node.js 24、npm ci、build/client 为公开产物；保留普通静态预渲染，不引入服务端。旧 vercel.json 不参与当前部署。
+- 真实站点地址为 https://xuxu312.github.io/shuangfei-portfolio/；构建时通过 PORTFOLIO_SITE_URL 提供，统一处理路由和图片前缀。继续保留 noindex，开放收录须另行确认；noindex 不提供访问保护。
 - 部署配置、账号、上传、公开范围、付费及Git提交身份由用户按阶段确认；报告通过/失败/未验证。

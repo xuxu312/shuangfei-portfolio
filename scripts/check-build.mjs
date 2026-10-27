@@ -3,14 +3,13 @@ import { join, relative, resolve } from "node:path";
 import { log } from "node:console";
 import assert from "node:assert/strict";
 import process from "node:process";
-import { URL } from "node:url";
 import { projects } from "../src/data/projects.ts";
 import { shares } from "../src/data/shares.ts";
 import { intro } from "../src/data/site.ts";
 import { getFeaturedCards, getProjectPaths } from "../src/lib/projects.ts";
 import { contentAssets } from "../src/lib/validate-content.ts";
 import { privateTerms, privacyFindings } from "./privacy.mjs";
-import { resolvePublication, publicationFiles } from "../src/lib/publication.ts";
+import { resolvePublication, publicationFiles, absoluteSiteUrl } from "../src/lib/publication.ts";
 
 const output = resolve("build/client");
 const publication = resolvePublication(process.env.PORTFOLIO_TARGET, process.env.PORTFOLIO_SITE_URL);
@@ -104,14 +103,23 @@ for (const path of publicationPaths) {
   const project = projects.find((item) => path === `/projects/${item.slug}/`);
   const image = path === "/" ? cards[0]?.cover : project?.cover;
   if (publication.origin) {
-    assert(html.includes(`rel="canonical" href="${new URL(path, publication.origin).href}"`), "canonical地址不同步");
-    assert(html.includes(`property="og:url" content="${new URL(path, publication.origin).href}"`), "分享地址不同步");
-    if (image) assert(html.includes(`property="og:image" content="${new URL(image, publication.origin).href}"`), "分享图地址不同步");
+    assert(html.includes(`rel="canonical" href="${absoluteSiteUrl(path, publication)}"`), "canonical地址不同步");
+    assert(html.includes(`property="og:url" content="${absoluteSiteUrl(path, publication)}"`), "分享地址不同步");
+    if (image) assert(html.includes(`property="og:image" content="${absoluteSiteUrl(image, publication)}"`), "分享图地址不同步");
   } else {
     assert(!html.includes('rel="canonical"') && !html.includes('property="og:image"') && !html.includes('property="og:url"'), "本地审核包不得伪造正式分享地址");
   }
 }
 assert((await readFile(join(output, "404.html"), "utf8")).includes('content="noindex, nofollow"'), "404必须不收录");
+assert((await readFile(join(output, "404.html"), "utf8")).includes(`href="${publication.basePath}"`), "404返回链接必须使用站点前缀");
+if (publication.basePath !== "/") {
+  for (const file of paths.filter((path) => path.endsWith(".html"))) {
+    const html = await readFile(join(output, file), "utf8");
+    for (const match of html.matchAll(/(?:href|src)="(\/(?!\/)[^"]*)"/g)) {
+      assert(match[1].startsWith(publication.basePath), `遗漏站点前缀：${file} ${match[1]}`);
+    }
+  }
+}
 const buildPublication = JSON.parse(await readFile("build/publication.json", "utf8"));
 assert.equal(buildPublication.origin, publication.origin);
 assert.equal(buildPublication.target, publication.target);

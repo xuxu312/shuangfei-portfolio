@@ -1,10 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { resolvePublication, publicationFiles } from "../src/lib/publication.ts";
+import { resolvePublication, publicationFiles, sitePath, absoluteSiteUrl } from "../src/lib/publication.ts";
 import { pageMetadata } from "../src/lib/metadata.ts";
 import { readFileSync } from "node:fs";
 
-test("发布拒绝缺网址、本机、示例、带凭据或非根路径地址", () => {
+test("发布拒绝缺网址、本机、示例、带凭据或不安全路径地址", () => {
   for (const value of ["", "http://portfolio.pages.dev", "https://localhost", "https://127.0.0.1", "https://[::1]",
     "https://192.168.1.2", "https://sample.invalid", "https://example.com", "https://x.example.org",
     "https://your-project.pages.dev", "https://user:pass@portfolio.pages.dev", "https://portfolio.pages.dev/path",
@@ -25,9 +25,29 @@ test("网址未定时仍可本地浏览，但不生成伪造canonical、分享�
   assert.equal(publicationFiles(settings, ["/"]).sitemap, null);
 });
 
+test("Pages 子路径同步导航、图片、canonical和站点地图，本地仍使用根路径", () => {
+  const settings = resolvePublication("release", "https://xuxu312.github.io/shuangfei-portfolio/");
+  assert.equal(settings.basePath, "/shuangfei-portfolio/");
+  assert.equal(sitePath("/", settings), "/shuangfei-portfolio/");
+  assert.equal(sitePath("/#projects", settings), "/shuangfei-portfolio/#projects");
+  assert.equal(sitePath("#tools", settings), "#tools");
+  assert.equal(sitePath("https://external.invalid/item", settings), "https://external.invalid/item");
+  assert.equal(sitePath("/images/a.webp", resolvePublication()), "/images/a.webp");
+  const path = "/projects/isolated/";
+  const expected = "https://xuxu312.github.io/shuangfei-portfolio/projects/isolated/";
+  assert.equal(absoluteSiteUrl(path, settings), expected);
+  const meta = pageMetadata("标题", "摘要", "/images/a.webp", path, settings);
+  assert(meta.some((entry) => entry.rel === "canonical" && entry.href === expected));
+  assert(meta.some((entry) => entry.property === "og:image" && entry.content === "https://xuxu312.github.io/shuangfei-portfolio/images/a.webp"));
+  assert(publicationFiles(settings, ["/", path]).sitemap.includes(expected));
+  for (const path of ["/unsafe", "/../", "/a/../", "/%2e%2e/", "//", "/a//b/", "/a\\b/"]) {
+    assert.throws(() => resolvePublication("release", "https://xuxu312.github.io" + path), /Release refused/);
+  }
+});
+
 test("配置模板在隔离资料上同步页面地址、分享图和站点地图，错误页无canonical", () => {
   // .invalid只存在于本测试内，不经环境校验进入构建，也不发网络请求。
-  const settings = { target: "release", origin: "https://publication.invalid" };
+  const settings = { target: "release", origin: "https://publication.invalid", basePath: "/" };
   const path = "/projects/isolated/";
   const meta = pageMetadata("测试标题", "测试摘要", "/images/isolated.png", path, settings);
   assert(meta.some((entry) => entry.rel === "canonical" && entry.href === settings.origin + path));

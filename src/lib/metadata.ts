@@ -1,4 +1,4 @@
-import { resolvePublication, type Publication } from "./publication.ts";
+import { absoluteSiteUrl, resolvePublication, type Publication } from "./publication.ts";
 
 const publication = typeof __PORTFOLIO_PUBLICATION__ === "undefined" ? resolvePublication() : __PORTFOLIO_PUBLICATION__;
 
@@ -11,9 +11,9 @@ export function pageMetadata(title: string, description: string, image?: string,
     { property: "og:description", content: description },
     { property: "og:type", content: "website" },
     ...(settings.origin && path ? [
-      { tagName: "link" as const, rel: "canonical", href: new URL(path, settings.origin).href },
-      { property: "og:url", content: new URL(path, settings.origin).href },
+      { tagName: "link" as const, rel: "canonical", href: absoluteSiteUrl(path, settings) },
+      { property: "og:url", content: absoluteSiteUrl(path, settings) },
     ] : []),
-    ...(settings.origin && image ? [{ property: "og:image", content: new URL(image, settings.origin).href }] : []),
+    ...(settings.origin && image ? [{ property: "og:image", content: absoluteSiteUrl(image, settings) }] : []),
   ];
 }

@@ -1,0 +1,52 @@
+name: Publish portfolio to GitHub Pages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+      - uses: actions/configure-pages@v5
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck:fixtures
+      - run: npm run test:content && npm run test:publication && npm run test:privacy
+      - run: npm run test:build
+      - run: npm run build:release
+        env:
+          PORTFOLIO_SITE_URL: https://xuxu312.github.io/shuangfei-portfolio/
+      - run: npm run check:privacy
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: build/client
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy reviewed build
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,3 +1,4 @@
+import { sitePath } from "./lib/publication";
 import type { ReactNode } from "react";
 import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 import { MissingPage } from "./components/MissingPage";
@@ -45,7 +46,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
     <main className="mx-auto max-w-3xl px-6 py-16 sm:px-8 sm:py-24">
       <h1 className="text-2xl font-semibold">页面暂时无法显示</h1>
       <p className="mt-6 leading-7">请返回首页后重试。</p>
-      <a className="mt-6 inline-block underline underline-offset-4" href="/">
+      <a className="mt-6 inline-block underline underline-offset-4" href={sitePath("/")}>
         返回首页
       </a>
       {import.meta.env.DEV && error instanceof Error && (

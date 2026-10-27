@@ -1,3 +1,4 @@
+import { sitePath } from "../lib/publication";
 import type { Share } from "../types/content";
 import { ContentSection } from "./ContentSection";
 
@@ -10,7 +11,7 @@ export function Sharing({ items }: { items: readonly Share[] }) {
         <div className="space-y-5">
           {items.map((share) => (
             <article key={share.id} aria-labelledby={`share-${share.id}-title`} className="rounded-xl border border-line p-5 sm:flex sm:items-start sm:gap-5">
-              {share.cover && <img src={share.cover.src} alt={share.cover.alt} width={share.cover.width} height={share.cover.height} loading="lazy" className="mb-4 h-auto w-full rounded-lg object-contain sm:mb-0 sm:w-40 sm:shrink-0" />}
+              {share.cover && <img src={sitePath(share.cover.src)} alt={share.cover.alt} width={share.cover.width} height={share.cover.height} loading="lazy" className="mb-4 h-auto w-full rounded-lg object-contain sm:mb-0 sm:w-40 sm:shrink-0" />}
               <div className="min-w-0">
                 <p className="text-sm leading-6 text-accent">{share.platform}</p>
                 <h3 id={`share-${share.id}-title`} className="mt-2 text-xl leading-8 font-semibold wrap-anywhere">{share.title}</h3>

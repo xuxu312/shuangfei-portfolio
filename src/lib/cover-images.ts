@@ -1,3 +1,4 @@
+import { sitePath } from "./publication.ts";
 // 封面、分享及放大入口统一使用已审核的公开版；响应式变体也只关联公开素材。
 // 作品撤下时由 contentAssets 同步核对附件。
 const variants: Record<string, readonly { src: string; width: number }[]> = {
@@ -13,9 +14,9 @@ export function coverAssets(original: string): string[] {
 
 export function coverImage(original: string): { src: string; srcSet?: string } {
   const images = variants[original];
-  if (!images?.length) return { src: original };
+  if (!images?.length) return { src: sitePath(original) };
   return {
-    src: images[images.length - 1].src,
-    srcSet: images.map((image) => `${image.src} ${image.width}w`).join(", "),
+    src: sitePath(images[images.length - 1].src),
+    srcSet: images.map((image) => `${sitePath(image.src)} ${image.width}w`).join(", "),
   };
 }
