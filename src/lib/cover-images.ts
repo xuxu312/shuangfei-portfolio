@@ -6,6 +6,10 @@ const variants: Record<string, readonly { src: string; width: number }[]> = {
     { src: "/images/mmc/platform-public-400.webp", width: 400 },
     { src: "/images/mmc/platform-public-680.webp", width: 680 },
   ],
+  "/images/flyback/iteration-cover-560.webp": [
+    { src: "/images/flyback/iteration-cover-360.webp", width: 360 },
+    { src: "/images/flyback/iteration-cover-560.webp", width: 560 },
+  ],
 };
 
 export function coverAssets(original: string): string[] {
