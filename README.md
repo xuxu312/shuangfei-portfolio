@@ -6,6 +6,8 @@
 
 站点地址：[双非电源仔的作品集](https://xuxu312.github.io/shuangfei-portfolio/)。仓库源码和整理文档现为公开内容，网站仅发布构建产物；暂保留 noindex。
 
+2026-11-07 已发布第二个真实作品：[65W 准谐振反激电源](https://xuxu312.github.io/shuangfei-portfolio/projects/ncp1342-flyback-power-supply/)。网站代码版本为 `789a958`，Pages 构建和部署成功；线上验证结果与保留事项见文档记录。
+
 ## 开发过程文档
 
 这些是适合随源码保存的仓库整理版，保留需求、决策、实际操作、返工和验证结论；不包含原始聊天、私人文件路径、内部附件或全量测试截图。完整原始记录继续留在本地。
