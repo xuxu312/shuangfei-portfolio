@@ -10,6 +10,10 @@ const variants: Record<string, readonly { src: string; width: number }[]> = {
     { src: "/images/flyback/iteration-cover-360.webp", width: 360 },
     { src: "/images/flyback/iteration-cover-560.webp", width: 560 },
   ],
+  "/images/llc/llc-cover-560.webp": [
+    { src: "/images/llc/llc-cover-360.webp", width: 360 },
+    { src: "/images/llc/llc-cover-560.webp", width: 560 },
+  ],
 };
 
 export function coverAssets(original: string): string[] {
