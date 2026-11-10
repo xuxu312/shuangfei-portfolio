@@ -8,7 +8,7 @@
 
 2026-11-07 已发布第二个真实作品：[65W 准谐振反激电源](https://xuxu312.github.io/shuangfei-portfolio/projects/ncp1342-flyback-power-supply/)。网站代码版本为 `789a958`，Pages 构建和部署成功；线上验证结果与保留事项见文档记录。
 
-2026-11-10 用户已验收第三个作品“240 W 半桥 LLC 电源”的公开图片和本地网页，并授权本次 GitHub 推送及 Pages 发布。本批沿用现有布局，新增原理图、PCB、样机封面和实际波形；发布及线上复测结果见实战记录与验证记录。
+2026-11-10 第三个真实作品 [240 W 半桥 LLC 电源](https://xuxu312.github.io/shuangfei-portfolio/projects/l6599-llc-converter/) 已随代码提交 `004d386` 发布。[Pages 构建与部署](https://github.com/xuxu312/shuangfei-portfolio/actions/runs/42773583479)成功，线上 64 项 HTTP/资源检查及 42 项 Playwright 复测通过；首页现有 MMC、反激和 LLC 三个作品。详细记录及仍未验证事项见实战记录与验证记录。
 
 ## 开发过程文档
 
