@@ -281,4 +281,140 @@ export const projects: Project[] = [
       }
     ]
   },
+  {
+    "id": "anpc-six-channel-driver",
+    "slug": "anpc-six-channel-gate-driver",
+    "visibility": "public",
+    "featured": true,
+    "order": 40,
+    "areas": [
+      "projects"
+    ],
+    "status": "原理图与 PCB 设计交付",
+    "title": "ANPC 六路隔离驱动板",
+    "fullTitle": "ANPC 六路隔离驱动板",
+    "summary": "面向 ANPC 光伏逆变器，基于 6 颗 NSI6801 完成六路隔离驱动原理图适配与四层 PCB 设计。",
+    "category": "电力电子 / 隔离驱动",
+    "tags": [
+      "NSI6801",
+      "隔离驱动",
+      "四层 PCB"
+    ],
+    "cover": "/images/anpc/anpc-pcb-public-560.webp",
+    "coverAlt": "六路隔离驱动板的 PCB 布局与布线，带双非电源仔水印",
+    "coverWidth": 560,
+    "coverHeight": 366,
+    "coverCaption": "六路驱动板 PCB（公开展示版）。",
+    "overview": "这块板用于连接逆变器的控制端与功率级，为一个 ANPC 相桥臂的 6 个功率器件提供隔离驱动和配套的独立供电。本项目只展示采用 6 颗 NSI6801 的单板六路方案，重点呈现原理图适配与四层 PCB 的板级实现。",
+    "contributions": [
+      {
+        "title": "六路原理图适配",
+        "description": "完成隔离驱动、配套供电、缓冲及接口电路的适配与连接。"
+      },
+      {
+        "title": "四层 PCB Layout",
+        "description": "完成器件布局、布线与四层板级设计。"
+      }
+    ],
+    "facts": [
+      {
+        "label": "应用场景",
+        "value": "ANPC 光伏逆变器的板级隔离驱动"
+      },
+      {
+        "label": "单板对应",
+        "value": "一个 ANPC 相桥臂的 6 个功率器件"
+      },
+      {
+        "label": "隔离驱动",
+        "value": "6 × NSI6801 单通道"
+      },
+      {
+        "label": "输入缓冲",
+        "value": "NCA8541，包含公共使能"
+      },
+      {
+        "label": "隔离供电",
+        "value": "2 × NSD1026V、3 只变压器、6 组独立副边供电"
+      },
+      {
+        "label": "PCB 层数",
+        "value": "四层：Top / GND / Power / Bottom"
+      },
+      {
+        "label": "完成范围",
+        "value": "原理图适配与 PCB 设计交付"
+      },
+      {
+        "label": "验证边界",
+        "value": "不将整机性能、安规或实板测试列为本人已完成成果"
+      }
+    ],
+    "evidenceHeading": "最终六路方案：原理图与 PCB",
+    "evidence": [
+      {
+        "title": "六路隔离驱动原理图",
+        "src": "/images/anpc/anpc-schematic-public-900.webp",
+        "width": 900,
+        "height": 619,
+        "alt": "采用六颗 NSI6801 的六路隔离驱动原理图，带中文水印，非电路标题栏已遮挡",
+        "caption": "采用 6 颗 NSI6801 的六路方案，包含隔离驱动、供电、缓冲与接口电路。图片为公开展示版，不提供原始工程文件。"
+      },
+      {
+        "title": "四层 PCB Layout",
+        "src": "/images/anpc/anpc-pcb-public-900.webp",
+        "width": 900,
+        "height": 588,
+        "alt": "六路隔离驱动板的 PCB 布局与布线，带双非电源仔水印",
+        "caption": "六路驱动板的布局与布线，采用 Top / GND / Power / Bottom 四层组织。层名不等于所有参考端可以共地。"
+      }
+    ],
+    "detailSections": [
+      {
+        "id": "signal-chain",
+        "title": "工作原理：六路信号链",
+        "paragraphs": [
+          "上层控制器送来的六路控制信号，先经过 NCA8541 缓冲和公共使能，再进入六颗 NSI6801，形成六路隔离驱动输出，连接到功率板上的相应器件。驱动板负责传递、隔离和驱动，不在板上生成逆变器调制或死区。"
+        ]
+      },
+      {
+        "id": "power-chain",
+        "title": "工作原理：六路供电链",
+        "paragraphs": [
+          "两颗 NSD1026V 在外部时序驱动下激励三只变压器，每只变压器提供两个独立副边，经过整流滤波后，为六路驱动输出侧供电。每路相对自己的浮动参考端工作，不能把六路输出参考端当成同一个公共地。"
+        ]
+      },
+      {
+        "id": "layout",
+        "title": "PCB 怎样组织",
+        "paragraphs": [
+          "板卡采用四层结构，按隔离供电、输入缓冲、六路驱动和输出接口组织电路。现有工程中的六颗 NSI6801 沿同一排重复布置，各通道按相近的单元结构展开。",
+          "布局复盘重点看三条电流回路：变压器原边激励、副边整流充电，以及跨越连接器、线束和功率板的完整门极驱动回路。不能只看驱动板上的线短不短，还要看电流从哪里返回。"
+        ]
+      },
+      {
+        "id": "precautions",
+        "title": "画板时重点注意什么",
+        "items": [
+          {
+            "title": "隔离与参考地",
+            "text": "逻辑侧和六路浮动输出分开检查，内层铺铜也不能把本应隔离的参考端连接起来；层名写着 GND，不代表可以整板共地。"
+          },
+          {
+            "title": "去耦与脉冲回路",
+            "text": "去耦电容应靠近芯片电源脚，整流器与储能电容围绕副边组织，尽量缩小快速变化电流的闭合路径。"
+          },
+          {
+            "title": "驱动输出与回流",
+            "text": "输出和对应参考端成对考虑，连同连接器、线束与功率板一起复查，不能只优化本板局部。"
+          },
+          {
+            "title": "规则与交付",
+            "text": "隔离间距需要对应明确的设计输入；DRC 无违规不能代替耐压、EMC 或实板验证，原理图、BOM 与制造文件也要保持同一版本。"
+          }
+        ],
+        "notice": "以上是设计关注点和复查标准，不表示原板已经逐项验证通过。"
+      }
+    ]
+  },
 ];

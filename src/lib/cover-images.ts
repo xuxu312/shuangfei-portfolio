@@ -14,6 +14,11 @@ const variants: Record<string, readonly { src: string; width: number }[]> = {
     { src: "/images/llc/llc-cover-360.webp", width: 360 },
     { src: "/images/llc/llc-cover-560.webp", width: 560 },
   ],
+  "/images/anpc/anpc-pcb-public-560.webp": [
+    { src: "/images/anpc/anpc-pcb-public-360.webp", width: 360 },
+    { src: "/images/anpc/anpc-pcb-public-560.webp", width: 560 },
+    { src: "/images/anpc/anpc-pcb-public-900.webp", width: 900 },
+  ],
 };
 
 export function coverAssets(original: string): string[] {

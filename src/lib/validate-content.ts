@@ -50,6 +50,19 @@ export function validateContent(projects: readonly Project[], shares: readonly S
     unique(p.facts.map((item) => item.label), `${at}.facts`);
     p.contributions.forEach((item) => { text(item.title, `${at}.contributions.title`); text(item.description, `${at}.contributions.description`); });
     unique(p.contributions.map((item) => item.title), `${at}.contributions`);
+    if (p.detailSections) {
+      unique(p.detailSections.map((section) => section.id), `${at}.detailSections`);
+      p.detailSections.forEach((section) => {
+        const field = `${at}.detailSections.${section.id}`;
+        if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(section.id)) errors.push(`${field}.id：使用稳定的小写标识`);
+        text(section.title, `${field}.title`);
+        if (!section.paragraphs?.length && !section.items?.length) errors.push(`${field}：需要正文或列表`);
+        section.paragraphs?.forEach((paragraph) => text(paragraph, `${field}.paragraphs`));
+        section.items?.forEach((item) => { text(item.title, `${field}.items.title`); text(item.text, `${field}.items.text`); });
+        if (section.items) unique(section.items.map((item) => item.title), `${field}.items`);
+        if (section.notice !== undefined) text(section.notice, `${field}.notice`);
+      });
+    }
     p.evidence.forEach((item) => { text(item.title, `${at}.evidence.title`); text(item.caption, `${at}.evidence.caption`); image(item, `${at}.evidence`); });
     unique(p.evidence.map((item) => item.title), `${at}.evidence`);
     if (p.overviewImage) image(p.overviewImage, `${at}.overviewImage`);

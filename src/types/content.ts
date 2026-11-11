@@ -33,6 +33,14 @@ export interface ProjectCardContent {
   linkLabel: string;
 }
 
+export interface ProjectTextSection {
+  id: string;
+  title: string;
+  paragraphs?: string[];
+  items?: { title: string; text: string }[];
+  notice?: string;
+}
+
 export interface Project extends Omit<ProjectCardContent, "href" | "linkLabel"> {
   slug: string;
   // 草稿仅供隔离测试/本地资料使用，正式项目数组只允许 public。
@@ -46,6 +54,7 @@ export interface Project extends Omit<ProjectCardContent, "href" | "linkLabel"> 
   coverCaption?: string;
   evidenceHeading?: string;
   contributions: { title: string; description: string }[];
+  detailSections?: ProjectTextSection[];
   facts: { label: string; value: string }[];
   evidence: {
     title: string;

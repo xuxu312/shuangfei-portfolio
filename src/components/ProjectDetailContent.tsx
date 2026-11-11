@@ -52,6 +52,24 @@ export function ProjectDetailContent({ project, backHref = "/#projects" }: { pro
           </ul>
         </section>}
 
+        {project.detailSections?.map((section) => (
+          <section key={section.id} aria-labelledby={`detail-${section.id}-title`} className="detail-section border-t border-line">
+            <h2 id={`detail-${section.id}-title`} className="detail-heading">{section.title}</h2>
+            {section.paragraphs?.map((paragraph) => (
+              <p key={paragraph} className="mt-5 max-w-prose leading-8 text-muted">{paragraph}</p>
+            ))}
+            {section.items && section.items.length > 0 && <ul className="mt-6 grid gap-x-12 gap-y-6 sm:grid-cols-2">
+              {section.items.map((item) => (
+                <li key={item.title}>
+                  <h3 className="text-lg font-medium leading-7">{item.title}</h3>
+                  <p className="mt-2 max-w-prose leading-7 text-muted">{item.text}</p>
+                </li>
+              ))}
+            </ul>}
+            {section.notice && <p className="mt-5 max-w-prose text-sm leading-7 text-muted">{section.notice}</p>}
+          </section>
+        ))}
+
         {project.evidence.length > 0 && <section aria-labelledby="evidence-title" className="detail-section border-t border-line">
           <h2 id="evidence-title" className="detail-heading">{project.evidenceHeading ?? "成果展示"}</h2>
           <div className="mt-6 grid items-start gap-8 md:grid-cols-2">
