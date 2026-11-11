@@ -10,7 +10,7 @@
 
 2026-11-10 第三个真实作品 [240 W 半桥 LLC 电源](https://xuxu312.github.io/shuangfei-portfolio/projects/l6599-llc-converter/) 已随代码提交 `004d386` 发布。[Pages 构建与部署](https://github.com/xuxu312/shuangfei-portfolio/actions/runs/42773583479)成功，线上 64 项 HTTP/资源检查及 42 项 Playwright 复测通过；首页现有 MMC、反激和 LLC 三个作品。详细记录及仍未验证事项见实战记录与验证记录。
 
-2026-11-11 第四个真实作品 ANPC 六路隔离驱动板已按用户审核内容接入，并通过本地检查。仅展示最终六路方案的原理图和 PCB 两张逻辑图片，四个公开尺寸文件；本条记录时尚未推送和部署，线上结果完成后补记。
+2026-11-11 第四个真实作品 [ANPC 六路隔离驱动板](https://xuxu312.github.io/shuangfei-portfolio/projects/anpc-six-channel-gate-driver/) 已随代码提交 `2b1caad` 发布。仅展示最终六路方案的原理图和 PCB 两张逻辑图片，四个公开尺寸文件。[Pages 构建和部署](https://github.com/xuxu312/shuangfei-portfolio/actions/runs/43023855777)成功；正式网站 74 项 HTTP/资源检查、52 项 Playwright 检查通过。首页当前为四个真实作品。
 
 ## 开发过程文档
 

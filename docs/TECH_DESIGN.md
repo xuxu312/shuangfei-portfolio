@@ -50,7 +50,7 @@ docs/               仓库整理版开发过程文档
 - 首页选择公开、精选且属于作品区域的记录。
 - 工具从同一份项目记录派生，避免两个栏目维护两份项目资料。
 - 每个公开项目均生成 `/projects/{slug}/` 对应页面；取消精选不会删除详情。
-- 当前真实详情为 `/projects/single-phase-five-level-mmc/`、`/projects/ncp1342-flyback-power-supply/` 、`/projects/l6599-llc-converter/` 和 `/projects/anpc-six-channel-gate-driver/`。
+- 当前真实详情为 `/projects/single-phase-five-level-mmc/`、`/projects/ncp1342-flyback-power-supply/`、`/projects/l6599-llc-converter/` 和 `/projects/anpc-six-channel-gate-driver/`。
 - 正式项目数组拒绝草稿；需要撤下内容时同时检查资源，不以“界面看不到”作为保密方式。
 - 通用详情组件根据实际数据展示贡献、事实、证据和链接，缺少的可选部分不强制显示。可选 `detailSections` 保存原理和布局等正文块，包含稳定标识、标题、段落、列表及说明；旧项目不提供时不增加区块。内容校验检查重复标识和空正文。
 
